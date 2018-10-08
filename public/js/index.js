@@ -5,15 +5,23 @@ socket.on('connect', () => {
 
 socket.on('newMessage', (message) => {
     console.log('Message:', message);
+    let li = $("<li></li>");
+    li.text(`${message.from} : ${message.text}`);
+
+    $('#message-box').append(li);
 });
 
-socket.emit('createMessage', {
-    from: 'Frank',
-    text: 'Test Message',
-}, (ackData) => {
-    console.log('Got It: ', ackData);
-});
 
 socket.on('disconnect', () => {
     console.log('Disconnected From Server');
 });
+
+$('#message-form').on('submit', (e) => {
+    e.preventDefault();
+    socket.emit('createMessage', {
+        from: 'Frank',
+        text: $('[name="message"]').val(),
+    }, (ackData) => {
+        console.log('Got It: ', ackData);
+    });
+})
