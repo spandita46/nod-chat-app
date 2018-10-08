@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 const socketIO = require('socket.io');
 const http = require('http');
-const {generateMessage} = require('./utils/message');
+const {
+    generateMessage
+} = require('./utils/message');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
@@ -16,7 +18,12 @@ io.on('connection', socket => {
 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New User Joined!'));
 
-    socket.on('createMessage', message => io.emit('newMessage', generateMessage(...message)));
+    socket.on('createMessage', (message, callback) => {
+        io.emit('newMessage', generateMessage(message.from, message.text));
+        callback({
+            message: 'This is from server',
+        });
+    });
 
     socket.on('disconnect', () => {
         console.log("Client Disconnected");
