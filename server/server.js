@@ -19,6 +19,10 @@ io.on('connection', socket => {
 
     socket.on('createMessage', (message) => {
         console.log('Message:', message);
+        io.emit('newMessage',{
+            ...message,
+            createdAt:new Date().getTime(),
+        })
     });
 
     socket.on('disconnect', () => {
