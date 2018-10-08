@@ -19,7 +19,7 @@ socket.on('disconnect', () => {
 $('#message-form').on('submit', (e) => {
     e.preventDefault();
     socket.emit('createMessage', {
-        from: 'Frank',
+        from: $('[name="user"]').val(),
         text: $('[name="message"]').val(),
     }, (ackData) => {
         console.log('Got It: ', ackData);
