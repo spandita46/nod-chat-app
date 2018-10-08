@@ -1,0 +1,59 @@
+body {
+    background-color: azure;
+}
+
+ol,
+div,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: black;
+    color: white;
+    height: 30px;
+    margin-bottom: 5px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+ol {
+    list-style: none;
+}
+
+
+
+ol li {
+    border-bottom: 2px dashed white;
+    margin:5px;
+}
+
+.userNameContent {
+    text-align: right;
+}
+
+.txtField {
+    margin: 5px;
+}
+
+.txtUser {
+    width: 25%;
+    height: 30px;
+}
+
+.txtMessage {
+    margin: 5px;
+    width: 93%;
+    height: 60px;
+}
+
+.lstMessages {
+    min-height: 430px;
+    height: "fit-content";
+}
