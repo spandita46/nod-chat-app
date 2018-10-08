@@ -10,12 +10,18 @@ const server = http.createServer(app);
 var io = socketIO(server);
 io.on('connection', socket => {
     console.log("New Client Connected");
-
-    socket.emit('newMessage', {
-        from: 'Swati',
-        text: 'Hi!',
-        createdAt: new Date().toString(),
+     
+    socket.emit('newMessage',{
+        from:'Admin',
+        text:'Welcome To My Chat App',
+        createdAt:new Date().getTime(),
     });
+
+    socket.broadcast.emit('newMessage',{
+        from:'Admin',
+        text:'New User Joined!',
+        createdAt:new Date().getTime(),
+    })
 
     socket.on('createMessage', (message) => {
         console.log('Message:', message);
@@ -23,6 +29,10 @@ io.on('connection', socket => {
             ...message,
             createdAt:new Date().getTime(),
         })
+        // socket.broadcast.emit('newMessage',{
+        //     ...message,
+        //     createdAt:new Date().getTime(),
+        // });
     });
 
     socket.on('disconnect', () => {
